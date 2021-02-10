@@ -5,6 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -120,9 +121,9 @@ public class driveTrain extends SubsystemBase {
 		 * later.
 		 */
 		backRight.drive(backRightSpeed , backRightAngle);
-		backLeft.drive(backLeftSpeed , backLeftAngle);
+		backLeft.drive(-backLeftSpeed , backLeftAngle);
 		frontRight.drive(frontRightSpeed , frontRightAngle);
-		frontLeft.drive(-frontLeftSpeed , frontLeftAngle);
+		frontLeft.drive(frontLeftSpeed , frontLeftAngle);
 	}
 	
 	public void resetGyro(){ //had to change from ResetGryo to ResetGyro so if that wasn´t something I was supposed to change feel free to change it back

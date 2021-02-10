@@ -28,7 +28,7 @@ public class BallShooterCommandAuto extends CommandBase {
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // Called every time the scheduler runs while the command is scheduled
   @Override
   public void execute() {
     //TODO make distance based
