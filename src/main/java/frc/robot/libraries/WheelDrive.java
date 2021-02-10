@@ -37,7 +37,7 @@ public class WheelDrive {
     private boolean isF;
 	
 	public WheelDrive(int speedMotor, int angleMotor) {
-        //Pass in Encoder ports to objects
+        //Pass in Encoder ports to objects.
         //this.speedEnc = new AnalogInput(speedEncoder);
 
         //Create PID loops
