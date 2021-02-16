@@ -64,7 +64,7 @@ public final class Constants {
     public class BALL_SHOOTER_CONSTANTS{
         public static final int MOTOR_CONTROLLER_ID_TOP = 25;
         public static final int MOTOR_CONTROLLER_ID_BOTTOM = 27;
-        public static final double SPEED = 1;
+        public static final double SPEED = 0.5;
         public static final boolean IS_NEGATED_TOP = true;
         public static final boolean IS_NEGATED_BOTTOM = false;
         public static final boolean ENABLE_TUNING = true;

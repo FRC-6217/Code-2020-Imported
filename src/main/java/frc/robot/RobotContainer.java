@@ -20,6 +20,7 @@ import frc.robot.commands.JoyDriveCommand;
 import frc.robot.commands.NotShooterIntakeCommand;
 import frc.robot.commands.ShooterIntakeCommand;
 import frc.robot.commands.WinchCommand;
+import frc.robot.commands.autoCommand.AutoWeekZero;
 import frc.robot.commands.autoCommand.Test;
 import frc.robot.libraries.Angle;
 import frc.robot.libraries.Distance;
@@ -83,7 +84,8 @@ public class RobotContainer {
  
     //Xbox Joystick
   
-    new JoystickTrigger(xbox, 3).whileHeld(new ShooterIntakeCommand(shooterIntake, STATE.FORWARDS));
+    new JoystickTrigger(xbox, 3).whenPressed(new ShooterIntakeCommand(shooterIntake, STATE.FORWARDS));
+    new JoystickTrigger(xbox, 3).whenReleased(new ShooterIntakeCommand(shooterIntake, STATE.OFF));
     new JoystickButton(xbox, Button.kBumperLeft.value).whileHeld(new ArmLiftCommand(armLift, STATE.UP));
     new JoystickTrigger(xbox, 2).whileHeld(new ArmLiftCommand(armLift, STATE.DOWN));
     new JoystickButton(xbox, Button.kBumperRight.value).toggleWhenPressed(new BallShooterCommand(ballShooter, true));
@@ -116,9 +118,9 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     fake.setLeftShift(.9);
-    return new Test(driveTrain, fake);
+    // return new Test(driveTrain, fake);
     // An ExampleCommand will run in autonomous
-  //  return new AutoWeekZero(ballShooter, shooterIntake);
+   return new AutoWeekZero(ballShooter, shooterIntake, driveTrain, driveStick, angle);
   // return null;
   }
 }

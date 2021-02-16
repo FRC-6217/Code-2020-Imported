@@ -141,6 +141,7 @@ public class Align extends CommandBase {
   
       double localAngle = angle.getAngle();
       if((localAngle != (Double.POSITIVE_INFINITY))){
+        SmartDashboard.putBoolean("At Set", pidZ.atSetpoint());
         if (pidZ.atSetpoint()) {
           localAngle = 0;
         }      
@@ -149,7 +150,7 @@ public class Align extends CommandBase {
         SmartDashboard.putNumber("ErrorZ", errorZ);
         outputZ = MathUtil.clamp(errorZ, -1, 1);
 
-        driveTrain.Drive(x, -y, outputZ, 0.5);
+        driveTrain.Drive(x, -y, outputZ * .75, 0.5);
         //TODO set max speed constant
       }
       else{
