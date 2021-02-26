@@ -33,7 +33,7 @@ public class AutoWeekZero extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(new Align(train, joy, angle), 
     // new Wait(5),
-    new  BallShooterCommandAuto(bs, true), 
+    new  BallShooterCommandAuto(bs, true, 2500), 
     new Wait(1),
     new ShooterIntakeCommand(si, STATE.FORWARDS), 
     new WaitCommand(0.15),
@@ -62,6 +62,6 @@ public class AutoWeekZero extends SequentialCommandGroup {
     new ShooterIntakeCommand(si, STATE.FORWARDS), 
     new WaitCommand(0.15),
     new ShooterIntakeCommand(si, STATE.OFF),
-    new BallShooterCommandAuto(bs, false));
+    new BallShooterCommandAuto(bs, false, 2500));
   }
 }

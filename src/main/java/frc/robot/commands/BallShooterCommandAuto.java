@@ -12,22 +12,24 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ballShooter;
 
 public class BallShooterCommandAuto extends CommandBase {
-  boolean ifOn;
-  ballShooter shooter;
+  private boolean ifOn;
+  private ballShooter shooter;
+  private double rpm;
   /**
    * Creates a new ShooterCommand.
    */
-  public BallShooterCommandAuto(ballShooter shooter, boolean ifOn) {
+  public BallShooterCommandAuto(ballShooter shooter, boolean ifOn, double rpm) {
     addRequirements(shooter);
     this.shooter = shooter;
     this.ifOn = ifOn;
+    this.rpm = rpm;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    SmartDashboard.putNumber("Top Shoot Set", 2500);
-    SmartDashboard.putNumber("Bottom Shoot Set", 2500);
+    SmartDashboard.putNumber("Top Shoot Set Auto", rpm);
+    SmartDashboard.putNumber("Bottom Shoot Set Auto", rpm);
   }
 
   // Called every time the scheduler runs while the command is scheduled

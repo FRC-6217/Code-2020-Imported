@@ -3,6 +3,7 @@ package frc.robot.libraries;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANAnalog;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -14,7 +15,7 @@ import frc.robot.Constants.WHEEL_DRIVE_CONSTANTS;
 
 public class WheelDrive {
     //Encoder, motor, and current channel port for wheel module
-    private AnalogInput speedEnc;
+    private CANEncoder speedEnc;
     private CANAnalog angleEnc;
 
     //PID objects for angle and speed PID loops
@@ -38,7 +39,7 @@ public class WheelDrive {
 	
 	public WheelDrive(int speedMotor, int angleMotor) {
         //Pass in Encoder ports to objects.
-        //this.speedEnc = new AnalogInput(speedEncoder);
+        
 
         //Create PID loops
         //speedPID = new PIDController(1, 0.5, 0, 0.02);
@@ -50,7 +51,12 @@ public class WheelDrive {
         //Motors
         this.speedMotor = new CANSparkMax(speedMotor, MotorType.kBrushless);
         this.angleMotor = new VictorSPX(angleMotor);
+        this.speedEnc = this.speedMotor.getEncoder();
         this.angleEnc = this.speedMotor.getAnalog(CANAnalog.AnalogMode.kAbsolute);
+
+        //TODO factor
+        this.speedEnc.setPositionConversionFactor((6 * Math.PI)/speedEnc.getCountsPerRevolution());
+
 	}
 
 	public void drive(double speed, double angle) {
@@ -137,5 +143,13 @@ public class WheelDrive {
         speedMotor.set(speed);
         angleMotor.set(ControlMode.PercentOutput, angleOut);
 
-	}
+    }
+    
+    public double getSpeedEncoder(){
+        return speedEnc.getPosition();
+    }
+
+    public void resetSpeedEncoder(){
+        speedEnc.setPosition(0);
+    }
 }

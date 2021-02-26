@@ -139,6 +139,17 @@ public class driveTrain extends SubsystemBase {
 		return -gyro.getAngle();
 	}
 
+	public double getDistance(){
+		return ((Math.abs(backRight.getSpeedEncoder()) + Math.abs(backLeft.getSpeedEncoder()) + Math.abs(frontRight.getSpeedEncoder()) + Math.abs(frontLeft.getSpeedEncoder())/4));
+	}
+
+	public void resetDistance(){
+		backRight.resetSpeedEncoder();
+		backLeft.resetSpeedEncoder();
+		frontRight.resetSpeedEncoder();
+		frontLeft.resetSpeedEncoder();
+	}
+
 	@Override
   	public void periodic() {
 		if(CommandScheduler.getInstance().requiring(this) != null)
