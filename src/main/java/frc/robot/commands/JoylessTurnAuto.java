@@ -10,7 +10,7 @@ import frc.robot.subsystems.driveTrain;
 public class JoylessTurnAuto extends CommandBase {
   private final driveTrain train;
   private double angle;
-  private int direction = 1;
+  private int direction = -1;
   
 
 
@@ -30,7 +30,7 @@ public class JoylessTurnAuto extends CommandBase {
     if(shortest > Math.abs(train.GetAngle() + 360 - angle)){
       shortest = Math.abs(train.GetAngle() + 360 - angle);
       //TODO fix?!
-      direction = -1;
+      direction = 1;
     }
 
   }
@@ -39,7 +39,7 @@ public class JoylessTurnAuto extends CommandBase {
   @Override
   public void execute() {
 
-    train.Drive(0, 0, direction, 0.25);
+    train.Drive(0, 0, direction, 0.15);
   }
 
   // Called once the command ends or is interrupted.
@@ -52,6 +52,6 @@ public class JoylessTurnAuto extends CommandBase {
   @Override
   public boolean isFinished() {
     //TODO does gyro wrap?
-    return (Math.abs(train.GetAngle()) > Math.abs(angle));
+    return (-direction*train.GetAngle() < angle);
   }
 }

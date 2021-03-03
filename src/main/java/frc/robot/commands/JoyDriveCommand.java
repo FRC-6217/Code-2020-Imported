@@ -52,6 +52,8 @@ public class JoyDriveCommand extends CommandBase {
     // gyroButtonBackward = joy.getRawButton(6);        
     governer = joy.getRawAxis(3);
 
+    driveTrain.getDistance();
+
     // if(gyroButtonForward){
     //     driveTrain.resetGyro();
     //     isReversed = false;

@@ -17,10 +17,12 @@ import frc.robot.commands.ArmLiftCommand;
 import frc.robot.commands.BallShooterCommand;
 import frc.robot.commands.ColorWheelCommand;
 import frc.robot.commands.JoyDriveCommand;
+import frc.robot.commands.JoylessDriveAuto;
 import frc.robot.commands.NotShooterIntakeCommand;
 import frc.robot.commands.ShooterIntakeCommand;
 import frc.robot.commands.WinchCommand;
 import frc.robot.commands.autoCommand.AutoWeekZero;
+import frc.robot.commands.autoCommand.JudgeAuto;
 import frc.robot.commands.autoCommand.Test;
 import frc.robot.libraries.Angle;
 import frc.robot.libraries.Distance;
@@ -71,6 +73,8 @@ public class RobotContainer {
     // Configure the button bindings
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new JoyDriveCommand(driveTrain, driveStick));
     configureButtonBindings();
+
+    driveTrain.resetGyro();
   }
 
   /**
@@ -94,6 +98,8 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kA.value).whileHeld(new NotShooterIntakeCommand(notShooterIntake, STATE.FORWARDS));
     new JoystickButton(xbox, Button.kB.value).whileHeld(new NotShooterIntakeCommand(notShooterIntake, STATE.REVERSE));
     new JoystickButton(xbox, Button.kStickRight.value).whileHeld(new ColorWheelCommand(colorWheel));
+
+    new JoystickButton(driveStick, 12).whenPressed(new JoylessDriveAuto(driveTrain, 0, -1, 136));
   
 
     // arm hn
@@ -118,9 +124,11 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     fake.setLeftShift(.9);
+    // driveTrain.resetGyro();
     // return new Test(driveTrain, fake);
     // An ExampleCommand will run in autonomous
-   return new AutoWeekZero(ballShooter, shooterIntake, driveTrain, driveStick, angle);
+   //return new AutoWeekZero(ballShooter, shooterIntake, driveTrain, driveStick, angle);
+   return new JudgeAuto(ballShooter, shooterIntake, notShooterIntake, driveTrain, driveStick, angle);
   // return null;
   }
 }

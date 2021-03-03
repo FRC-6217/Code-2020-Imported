@@ -55,7 +55,8 @@ public class WheelDrive {
         this.angleEnc = this.speedMotor.getAnalog(CANAnalog.AnalogMode.kAbsolute);
 
         //TODO factor
-        this.speedEnc.setPositionConversionFactor((6 * Math.PI)/speedEnc.getCountsPerRevolution());
+        this.speedEnc.setPositionConversionFactor(3);
+        // this.speedEnc.setPositionConversionFactor(100000);
 
 	}
 

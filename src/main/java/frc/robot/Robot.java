@@ -37,6 +37,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.setDefaultNumber("set top RPM", 0);
     SmartDashboard.setDefaultNumber("set bottom RPM", 0);
     SmartDashboard.setDefaultNumber("intakeSpeed", 0);
+
+    
   }
 
   /**

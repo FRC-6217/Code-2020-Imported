@@ -28,15 +28,15 @@ public class BallShooterCommandAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    SmartDashboard.putNumber("Top Shoot Set Auto", rpm);
-    SmartDashboard.putNumber("Bottom Shoot Set Auto", rpm);
+    // SmartDashboard.putNumber("Top Shoot Set Auto", rpm);
+    // SmartDashboard.putNumber("Bottom Shoot Set Auto", rpm);
   }
 
   // Called every time the scheduler runs while the command is scheduled
   @Override
   public void execute() {
-    double top = SmartDashboard.getNumber("Top Shoot Set", 0);
-    double bottom = SmartDashboard.getNumber("Bottom Shoot Set", 0);
+    double top = rpm; //SmartDashboard.getNumber("Top Shoot Set", 0);
+    double bottom = rpm; //SmartDashboard.getNumber("Bottom Shoot Set", 0);
     //TODO make distance based
     if(ifOn){
       shooter.onPID(top, bottom);

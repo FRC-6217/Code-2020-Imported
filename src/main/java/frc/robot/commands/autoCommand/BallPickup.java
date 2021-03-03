@@ -22,7 +22,7 @@ public class BallPickup extends ParallelDeadlineGroup {
     // Add the deadline command in the super() call. Add other commands using
     // addCommands().
     super(
-      new JoylessDriveAuto(train, -1, 0, 90),
+      new JoylessDriveAuto(train, 0, 1, 150),
       new NotShooterIntakeCommand(intake, STATE.FORWARDS)
     );
     // addCommands(new FooCommand(), new BarCommand());

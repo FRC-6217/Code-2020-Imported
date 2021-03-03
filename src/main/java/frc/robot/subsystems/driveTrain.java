@@ -135,12 +135,19 @@ public class driveTrain extends SubsystemBase {
 	}
 
 	public double GetAngle(){
-		SmartDashboard.putNumber("Gyro", -gyro.getAngle());
+		
 		return -gyro.getAngle();
 	}
 
 	public double getDistance(){
-		return ((Math.abs(backRight.getSpeedEncoder()) + Math.abs(backLeft.getSpeedEncoder()) + Math.abs(frontRight.getSpeedEncoder()) + Math.abs(frontLeft.getSpeedEncoder())/4));
+		SmartDashboard.putNumber("enc 1", backRight.getSpeedEncoder());
+		SmartDashboard.putNumber("enc 2", backLeft.getSpeedEncoder());
+		SmartDashboard.putNumber("enc 3", frontRight.getSpeedEncoder());
+		SmartDashboard.putNumber("enc 4", frontLeft.getSpeedEncoder());
+
+
+		// return backRight.getSpeedEncoder();
+		return (((Math.abs(backRight.getSpeedEncoder()) + Math.abs(backLeft.getSpeedEncoder()) + Math.abs(frontRight.getSpeedEncoder()) )/3));
 	}
 
 	public void resetDistance(){
@@ -154,5 +161,7 @@ public class driveTrain extends SubsystemBase {
   	public void periodic() {
 		if(CommandScheduler.getInstance().requiring(this) != null)
 		SmartDashboard.putString("DriveCommand", CommandScheduler.getInstance().requiring(this).toString());
+		SmartDashboard.putNumber("Gyro", GetAngle());
+		SmartDashboard.putNumber("Encoder Average", getDistance());
   	}
 }

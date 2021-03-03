@@ -12,6 +12,7 @@ import frc.robot.commands.Align;
 import frc.robot.commands.BallShooterCommandAuto;
 import frc.robot.commands.JoylessDriveAuto;
 import frc.robot.commands.JoylessTurnAuto;
+import frc.robot.commands.NotShooterIntakeCommand;
 import frc.robot.commands.ShooterIntakeCommand;
 import frc.robot.commands.Wait;
 import frc.robot.libraries.Angle;
@@ -33,7 +34,7 @@ public class JudgeAuto extends SequentialCommandGroup {
       //Start on right, align and shoot
       new Align(train, joy, angle),
       new BallShooterCommandAuto(bs, true, 2500), 
-      new Wait(1),
+      new Wait(2),
       new ShooterIntakeCommand(si, STATE.FORWARDS), 
       new WaitCommand(0.15),
       new ShooterIntakeCommand(si, STATE.OFF),
@@ -41,12 +42,12 @@ public class JudgeAuto extends SequentialCommandGroup {
 
       //Move to next center position
       new JoylessTurnAuto(train, 0),
-      new JoylessDriveAuto(train, 0, -1, 60),
+      new JoylessDriveAuto(train, -1, 0, 60),
 
       //Align and shoot
       new Align(train, joy, angle),
       new BallShooterCommandAuto(bs, true, 2500), 
-      new Wait(1),
+      new Wait(2),
       new ShooterIntakeCommand(si, STATE.FORWARDS), 
       new WaitCommand(0.15),
       new ShooterIntakeCommand(si, STATE.OFF),
@@ -54,26 +55,28 @@ public class JudgeAuto extends SequentialCommandGroup {
 
       //Move to left position
       new JoylessTurnAuto(train, 0),
-      new JoylessDriveAuto(train, 0, -1, 60),
+      new JoylessDriveAuto(train, -1, 0, 60),
+      new JoylessTurnAuto(train, -15),
 
       //Align and shoot
       new Align(train, joy, angle),
       new BallShooterCommandAuto(bs, true, 2500), 
-      new Wait(1),
+      new Wait(2),
       new ShooterIntakeCommand(si, STATE.FORWARDS), 
       new WaitCommand(0.15),
       new ShooterIntakeCommand(si, STATE.OFF),
       new BallShooterCommandAuto(bs, false, 2500),
 
       //pick up 2 balls
-      new JoylessTurnAuto(train, 135),
+      new JoylessTurnAuto(train, 0),
       new BallPickup(train, nsi),
+      new JoylessDriveAuto(train, 1, 0, 60),
       new JoylessTurnAuto(train, 0),
 
       //Big shoot
       //new JoylessDriveAuto(train, 1, 0, 0);
-      new BallShooterCommandAuto(bs, true, 4500), 
-      new Wait(1),
+      new BallShooterCommandAuto(bs, true, 3500), 
+      new Wait(2),
       new ShooterIntakeCommand(si, STATE.FORWARDS), 
       new WaitCommand(0.15),
       new ShooterIntakeCommand(si, STATE.OFF),
@@ -81,18 +84,19 @@ public class JudgeAuto extends SequentialCommandGroup {
 
       //drive to low goal
       new Align(train, joy, angle),
-      new JoylessDriveAuto(train, -1, 0, 120),
+      new JoylessDriveAuto(train, 0, -1, 120),
+      new NotShooterIntakeCommand(nsi, STATE.OFF),
 
       //shoot low
       new BallShooterCommandAuto(bs, true, 2000), 
-      new Wait(1),
+      new Wait(2),
       new ShooterIntakeCommand(si, STATE.FORWARDS), 
       new WaitCommand(0.15),
       new ShooterIntakeCommand(si, STATE.OFF),
       new BallShooterCommandAuto(bs, false, 2000),
 
       //back up
-      new JoylessDriveAuto(train, 1, 0, 90),
+      new JoylessDriveAuto(train, 0, 1, 90),
 
       //spinnnnn
       new JoylessTurnAuto(train, 900)
